@@ -36,19 +36,21 @@ vim.keymap.set({'i','c'},'<S-CR>', '<Esc>A<CR>')
 vim.keymap.set({'n','v'},'M', '%')
 
 -- ────────────────────hop.nvim(easymotion)────────────────────
--- place this in one of your configuration file(s)
-local hop = require('hop')
-
+-- wordの先頭に
 vim.keymap.set('', 'f','<cmd>HopWordCurrentLine<CR>')
 vim.keymap.set('', 'F','<cmd>HopWord<CR>')
+-- Line指定
 vim.keymap.set('', 's','<cmd>HopLineMW<CR>')
+-- パターン検索
 vim.keymap.set('', 'S','<cmd>HopPattern<CR>')
 
+-- 1文字検索
 vim.keymap.set('', 't', function()
-  hop.hint_char1({ direction = require('hop.hint').HintDirection, current_line_only = false})
+  require('hop').hint_char1({ direction = require('hop.hint').HintDirection, current_line_only = false})
 end, {remap=true})
+-- 2文字検索
 vim.keymap.set('', 'T', function()
-  hop.hint_char2({ direction = require('hop.hint').HintDirection, current_line_only = false})
+  require('hop').hint_char2({ direction = require('hop.hint').HintDirection, current_line_only = false})
 end, {remap=true})
 
 -- ────────────────────コピペ系────────────────────
@@ -68,6 +70,10 @@ vim.keymap.set('v','x','"_dx')
 vim.keymap.set('n','<leader>a','ggVG')
 -- 矩形
 vim.keymap.set('v','v',' <c-v>')
+
+-- インデントを複数回移動可能に
+vim.keymap.set('v','<<',' <<gv')
+vim.keymap.set('v','>>',' >>gv')
 
 -- ────────────────────システム関係────────────────────
 -- 設定ファイルを読み込む
@@ -244,4 +250,21 @@ vim.keymap.set('n',']Q', ':<C-u>clast<CR>')
 
 
 -- ────────────────────git関係────────────────────
-vim.keymap.set('n','<leader>gs', ':<C-u>clast<CR>')
+-- neogitのstatus画面を開く
+vim.keymap.set('n','<leader>gs',function()
+  require('neogit').open({kind = "split_above"})
+end, {remap=true})
+
+-- blame
+vim.keymap.set('n','<leader>bl',':Gitsigns blame')
+
+--marge tool
+vim.keymap.set('n', '<leader>df', ':DiffviewOpen<CR>')
+
+vim.keymap.set('n', '[c', function()
+  require('gitsigns').nav_hunk('prev')
+end, { desc = 'Git: prev Hunk' }) -- remap=true は不要
+-- vim.keymap.set('n', '[c', function()
+vim.keymap.set('n', ']c', function()
+  require('gitsigns').nav_hunk('next')
+end, { desc = 'Git: Next Hunk' }) -- remap=true は不要
