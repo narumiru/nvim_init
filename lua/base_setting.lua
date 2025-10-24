@@ -47,3 +47,8 @@ vim.opt.shiftwidth=4
 -- 不可視文字可視化
 vim.opt.list = true
 vim.opt.listchars = { tab = '>>', trail = '-', nbsp = '+' }
+
+
+-- ────────────────────diff────────────────────
+-- diffを横に
+vim.opt.diffopt:append('vertical')
