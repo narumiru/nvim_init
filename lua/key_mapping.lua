@@ -94,7 +94,6 @@ elseif vim.fn.has("win64") == 1 then
     vim.keymap.set('n','<Leader>lz','<cmd>cd ~/AppData/Local/nvim/lua<CR><cmd>e config/lazy.lua<CR>')
     vim.keymap.set('n','<Leader>pl','<cmd>cd ~/AppData/Local/nvim/lua/plugins<CR>')
     vim.keymap.set('n','<Leader>cd','<cmd>cd ~/txt<CR>')
-
 end
 
 -- ────────────────────日本語系────────────────────
