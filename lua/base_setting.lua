@@ -34,6 +34,8 @@ vim.opt.hidden=true
 -- □や○の文字があってもカーソル位置がずれないようにする。
 vim.opt.ambiwidth=double
 
+vim.opt.guifont="HackGen:h13"
+
 -- helpの日本語化
 vim.opt.helplang='ja'
 
