@@ -28,7 +28,7 @@ require("lazy").setup({
     { import = "plugins.vimdoc-ja"},
     { import = "plugins.nvim-autopairs"},
     { import = "plugins.nvim-surround"},
-    { import = "plugins.neogit"},
+    -- { import = "plugins.neogit"},
     { import = "plugins.hop"},
 
   },

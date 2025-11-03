@@ -31,10 +31,9 @@ vim.opt.hidden=true
 -- 日本語(マルチバイト文字)行の連結時には空白を入力しない。
 -- vim.opt.formatoptions
 
--- □や○の文字があってもカーソル位置がずれないようにする。
+-- □や…の文字があってもカーソル位置がずれないようにする。
+vim.opt.guifont="HackGen:h15"
 vim.opt.ambiwidth=double
-
-vim.opt.guifont="HackGen:h13"
 
 -- helpの日本語化
 vim.opt.helplang='ja'

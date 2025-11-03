@@ -83,10 +83,19 @@ vim.keymap.set('n','<leader>so','<cmd>source %<CR>')
 -- 開いてるファイルのディレクトリに移動
 vim.keymap.set('n','<Leader>cu','<cmd>lcd %:h<CR>')
 -- 
-vim.keymap.set('n','<Leader>in','<cmd>cd ~/.config/nvim/lua<CR><cmd>e ../init.lua<CR>')
-vim.keymap.set('n','<Leader>lz','<cmd>cd ~/.config/nvim/lua<CR><cmd>e config/lazy.lua<CR>')
-vim.keymap.set('n','<Leader>pl','<cmd>cd ~/.config/nvim/lua/plugins<CR>')
-vim.keymap.set('n','<Leader>cd','<cmd>cd ~/git_txt/txt<CR>')
+
+if vim.fn.has("mac") == 1 then
+    vim.keymap.set('n','<Leader>in','<cmd>cd ~/.config/nvim/lua<CR><cmd>e ../init.lua<CR>')
+    vim.keymap.set('n','<Leader>lz','<cmd>cd ~/.config/nvim/lua<CR><cmd>e config/lazy.lua<CR>')
+    vim.keymap.set('n','<Leader>pl','<cmd>cd ~/.config/nvim/lua/plugins<CR>')
+    vim.keymap.set('n','<Leader>cd','<cmd>cd ~/git_txt/txt<CR>')
+elseif vim.fn.has("win64") == 1 then
+    vim.keymap.set('n','<Leader>in','<cmd>cd ~/AppData/Local/nvim/lua<CR><cmd>e ../init.lua<CR>')
+    vim.keymap.set('n','<Leader>lz','<cmd>cd ~/AppData/Local/nvim/lua<CR><cmd>e config/lazy.lua<CR>')
+    vim.keymap.set('n','<Leader>pl','<cmd>cd ~/AppData/Local/nvim/lua/plugins<CR>')
+    vim.keymap.set('n','<Leader>cd','<cmd>cd ~/txt<CR>')
+
+end
 
 -- ────────────────────日本語系────────────────────
 -- 括弧
