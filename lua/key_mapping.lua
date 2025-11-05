@@ -137,10 +137,10 @@ vim.keymap.set('v','<Leader>~', '"zc~~<c-r>z~~<ESC>')
 
 -- ────────────────────mdファイル────────────────────
 -- vimgrip使用時の移動
-vim.keymap.set({'n','v'},'[s', '/^#+ ')
-vim.keymap.set({'n','v'},']s', ':cnext<CR>')
-vim.keymap.set({'n','v'},'[S', ':<C-u>cfirst<CR>')
-vim.keymap.set({'n','v'},']S', ':<C-u>clast<CR>')
+vim.keymap.set({'n','v'},'[s', '?^#+ ')
+vim.keymap.set({'n','v'},']s', '/^#+ ')
+vim.keymap.set({'n','v'},'[S', '?^# ')
+vim.keymap.set({'n','v'},']S', '/^# ')
 
 -- ────────────────────検索・grip────────────────────
 -- 大文字無視(大文字が含まれる場合のみ区別）
@@ -156,7 +156,7 @@ vim.keymap.set({'n','v'},'?','/\\v#')
 
 
 -- その単語が含まれるmdファイルのタイトルをgrip検索。
-vim.keymap.set('n','#', '<cmd>vim /^# / % | <cmd>winc b<CR>')
+vim.keymap.set('n','#', '<cmd>lcd %:h<CR><cmd>vim /^# / % <CR><cmd>winc b<CR>')
 
 -- その単語が含まれるカレントファイルのタイトルをgrip検索。
 vim.keymap.set('n', '<leader>3', function()

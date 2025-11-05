@@ -53,3 +53,11 @@ vim.opt.listchars = { tab = '>>', trail = '-', nbsp = '+' }
 -- ────────────────────diff────────────────────
 -- diffを横に
 vim.opt.diffopt:append('vertical')
+
+--────────────────────検索────────────────────
+ 
+-- vimgrep が完了した後に Quickfix ウィンドウを自動で開く
+vim.api.nvim_create_autocmd('QuickFixCmdPost', {
+  pattern = 'vimgrep', -- vimgrep コマンドの完了時に限定
+  command = 'copen',   -- quickfix ウィンドウを開く
+})
