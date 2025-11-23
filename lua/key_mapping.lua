@@ -137,10 +137,10 @@ vim.keymap.set('v','<Leader>~', '"zc~~<c-r>z~~<ESC>')
 
 -- ────────────────────mdファイル────────────────────
 -- vimgrip使用時の移動
-vim.keymap.set({'n','v'},'[s', '?^#+ ')
-vim.keymap.set({'n','v'},']s', '/^#+ ')
-vim.keymap.set({'n','v'},'[S', '?^# ')
-vim.keymap.set({'n','v'},']S', '/^# ')
+vim.keymap.set({'n','v'},'[s', '?\\v^#+ <CR>')
+vim.keymap.set({'n','v'},']s', '/\\v^#+ <CR>')
+vim.keymap.set({'n','v'},'[S', '?\\v^# <CR>')
+vim.keymap.set({'n','v'},']S', '/\\v^# <CR>')
 
 -- ────────────────────検索・grip────────────────────
 -- 大文字無視(大文字が含まれる場合のみ区別）
@@ -176,6 +176,7 @@ vim.keymap.set('n', '<leader>3', function()
     finalPattern = '^# .*' .. escapedTerm .. '.*'
   end
 
+  vim.cmd('lcd %:h')
   vim.cmd('vimgrep /' .. finalPattern .. '/ %')
   vim.cmd('copen')
 
@@ -198,6 +199,7 @@ vim.keymap.set('n', '<leader>#', function()
     finalPattern = '^#+ .*' .. escapedTerm .. '.*'
   end
 
+  vim.cmd('lcd %:h')
   vim.cmd('vimgrep /' .. finalPattern .. '/ %')
   vim.cmd('copen')
 
