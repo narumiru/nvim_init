@@ -42,7 +42,7 @@ vim.keymap.set('', 'F','<cmd>HopWord<CR>')
 -- Line指定
 vim.keymap.set('', 's','<cmd>HopLineMW<CR>')
 -- パターン検索
-vim.keymap.set('', 'S','<cmd>HopPattern<CR>')
+-- vim.keymap.set('', 'S','<cmd>HopPattern<CR>')
 
 -- 1文字検索
 vim.keymap.set('', 't', function()
@@ -89,49 +89,52 @@ if vim.fn.has("mac") == 1 then
     vim.keymap.set('n','<Leader>lz','<cmd>cd ~/.config/nvim/lua<CR><cmd>e config/lazy.lua<CR>')
     vim.keymap.set('n','<Leader>pl','<cmd>cd ~/.config/nvim/lua/plugins<CR>')
     vim.keymap.set('n','<Leader>cd','<cmd>cd ~/git_txt/txt<CR>')
+    vim.keymap.set('n','<Leader>lo','<cmd>cd ~/research/my_bbmocbs/log<CR>')
+    vim.keymap.set('n','<Leader>re','<cmd>cd ~/research/research_memo<CR><cmd>e 研究日誌_2025.md<CR>')
+
 elseif vim.fn.has("win64") == 1 then
     vim.keymap.set('n','<Leader>in','<cmd>cd ~/AppData/Local/nvim/lua<CR><cmd>e ../init.lua<CR>')
     vim.keymap.set('n','<Leader>lz','<cmd>cd ~/AppData/Local/nvim/lua<CR><cmd>e config/lazy.lua<CR>')
-    vim.keymap.set('n','<Leader>pl','<cmd>cd ~/AppData/Local/nvim/lua/plugins<CR>')
+    vim.keymap.set('n','<Leader>pl','<cmd>cd ~/AppData/Local/nvim/lua/plugins')
     vim.keymap.set('n','<Leader>cd','<cmd>cd ~/txt<CR>')
 end
 
 -- ────────────────────日本語系────────────────────
 -- 括弧
-vim.keymap.set('n', '<Leader>[', 'I「<ESC>A」  <ESC>')
+vim.keymap.set('n', '<Leader>[', 'I「<ESC>A」<ESC>')
 vim.keymap.set('v', '<Leader>[', '"zc「<c-r>z」<ESC>')
-vim.keymap.set('n', '<Leader>]', 'I『<ESC>A』  <ESC>')
+vim.keymap.set('n', '<Leader>]', 'I『<ESC>A』<ESC>')
 vim.keymap.set('v', '<Leader>]', '"zc『<c-r>z』<ESC>')
-vim.keymap.set('n', '<Leader>{', 'I【<ESC>A】  <ESC>')
+vim.keymap.set('n', '<Leader>{', 'I【<ESC>A】<ESC>')
 vim.keymap.set('v', '<Leader>{', '"zc【<c-r>z】<ESC>')
-vim.keymap.set('n', '<Leader>}', 'I《<ESC>A》  <ESC>')
+vim.keymap.set('n', '<Leader>}', 'I《<ESC>A》<ESC>')
 vim.keymap.set('v', '<Leader>}', '"zc《<c-r>z》<ESC>')
                                              
-vim.keymap.set('n','<Leader>8', 'I(<ESC>A)    <ESC>')
-vim.keymap.set('v','<Leader>8', '"zc(<c-r>z)  <ESC>')
-vim.keymap.set('n','<Leader>(', 'I（<ESC>A）  <ESC>')
+vim.keymap.set('n','<Leader>8', 'I(<ESC>A)<ESC>')
+vim.keymap.set('v','<Leader>8', '"zc(<c-r>z)<ESC>')
+vim.keymap.set('n','<Leader>(', 'I（<ESC>A）<ESC>')
 vim.keymap.set('v','<Leader>(', '"zc（<c-r>z）<ESC>')
 
 
 -- コメント
-vim.keymap.set('n','<Leader>/', 'I//<ESC>      ')
+vim.keymap.set('n','<Leader>/', 'I//<ESC>')
 vim.keymap.set('v','<Leader>/', '<c-v>0I//<ESC>')
-vim.keymap.set('n','<Leader>?', '/\v^・<CR>    ')
-vim.keymap.set('v','<Leader>?', '/\v^・<CR>    ')
+vim.keymap.set('n','<Leader>?', '/\v^・<CR>')
+vim.keymap.set('v','<Leader>?', '/\v^・<CR>')
 
 -- 引用符
-vim.keymap.set('n','<Leader>.', 'I＞<ESC>            ')
-vim.keymap.set('v','<Leader>.', '<c-v>0I＞<ESC>      ')
-vim.keymap.set('n','<Leader>>', 'I＞「<ESC>A」<ESC>  ')
+vim.keymap.set('n','<Leader>.', 'I＞<ESC>')
+vim.keymap.set('v','<Leader>.', '<c-v>0I＞<ESC>')
+vim.keymap.set('n','<Leader>>', 'I＞「<ESC>A」<ESC>')
 vim.keymap.set('v','<Leader>>', '"zc＞「<c-r>z」<ESC>')
 
-vim.keymap.set('n','<Leader>,', 'I≫<ESC>             ')
-vim.keymap.set('v','<Leader>,', '<c-v>0I≫<ESC>       ')
-vim.keymap.set('n','<Leader><', 'I≫「<ESC>A」<ESC>   ')
-vim.keymap.set('v','<Leader><', '"zc≫「<c-r>z」<ESC> ')
+vim.keymap.set('n','<Leader>,', 'I≫<ESC>')
+vim.keymap.set('v','<Leader>,', '<c-v>0I≫<ESC>')
+vim.keymap.set('n','<Leader><', 'I≫「<ESC>A」<ESC>')
+vim.keymap.set('v','<Leader><', '"zc≫「<c-r>z」<ESC>')
 
 -- 取り消し線
-vim.keymap.set('n','<Leader>~', 'I~~<ESC>A~~<ESC>  ')
+vim.keymap.set('n','<Leader>~', 'I~~<ESC>A~~<ESC>')
 vim.keymap.set('v','<Leader>~', '"zc~~<c-r>z~~<ESC>')
 
 
@@ -278,3 +281,28 @@ end, { desc = 'Git: prev Hunk' }) -- remap=true は不要
 vim.keymap.set('n', ']c', function()
   require('gitsigns').nav_hunk('next')
 end, { desc = 'Git: Next Hunk' }) -- remap=true は不要
+
+--────────────────────編集系────────────────────
+--行の連結
+vim.keymap.set('v','<c-s-j>','<c-j>') 
+
+--────────────────────tex────────────────────
+--句読点置き換え
+vim.keymap.set('n','<leader>co','<cmd>:%s/、/，/g<CR><cmd>:%s/。/．/g<CR>') 
+
+vim.keymap.set('n','<leader>ve','A\\verb||<esc><right>i') 
+vim.keymap.set('n','<leader>4','VS$') 
+vim.keymap.set('n','<leader>$','VS$') 
+
+vim.keymap.set('v','<leader>ve','S$bi\\verb') 
+vim.keymap.set('v','<leader>4','S$') 
+vim.keymap.set('v','<leader>$','S$') 
+
+
+
+--────────────────────ウィンドウ操作系────────────────────
+-- <Leader> + w を押すと、新しいGoneovimウィンドウ
+vim.keymap.set('n', '<Leader>sp', function()
+  -- detach = true にすることで、現在のNeovimとは無関係に独立して起動します
+  vim.fn.jobstart({'open', '-n', '-a', 'goneovim'}, {detach = true})
+end, { desc = 'Launch new Goneovim instance' })
