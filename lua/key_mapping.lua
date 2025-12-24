@@ -146,6 +146,8 @@ vim.keymap.set({'n','v'},'[S', '?\\v^# <CR>')
 vim.keymap.set({'n','v'},']S', '/\\v^# <CR>')
 
 -- ────────────────────検索・grip────────────────────
+-- noh
+vim.keymap.set('n','<Leader><Leader><Leader>', '<cmd>noh<CR>')
 -- 大文字無視(大文字が含まれる場合のみ区別）
 vim.opt.ignorecase=true
 vim.opt.smartcase=true
