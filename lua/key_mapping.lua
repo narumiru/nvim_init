@@ -166,6 +166,12 @@ vim.keymap.set('n','<Leader><Leader>>', 'I≫『<ESC>A』<ESC>')
 vim.keymap.set('n','<Leader>~', 'I~~<ESC>A~~<ESC>')
 vim.keymap.set('v','<Leader>~', '"zc~~<c-r>z~~<ESC>')
 
+-- 括弧
+vim.keymap.set('i','「」','「」<left>')
+vim.keymap.set('i','『』','『』<left>')
+vim.keymap.set('i','【】','【】<left>')
+vim.keymap.set('i','《》','《》<left>')
+vim.keymap.set('i','〔〕','〔〕<left>')
 
 -- ────────────────────mdファイル────────────────────
 -- vimgrip使用時の移動
@@ -316,6 +322,8 @@ vim.keymap.set('n', ']c', function()
   require('gitsigns').nav_hunk('next')
 end, { desc = 'Git: Next Hunk' }) -- remap=true は不要
 
+-- diff
+vim.keymap.set('n','<leader>gd',':Gitsigns diffthis')
 --────────────────────編集系────────────────────
 --行の連結
 vim.keymap.set('v','<c-s-j>','<c-j>') 
