@@ -128,7 +128,17 @@ elseif vim.fn.has("win64") == 1 then
 end
 
 -- ────────────────────日本語編集系────────────────────
--- 括弧
+
+-- 括弧入力時移動
+vim.keymap.set('i', '（）', '（）<left>')
+vim.keymap.set('i', '「」', '「」<left>')
+vim.keymap.set('i', '『』', '『』<left>')
+vim.keymap.set('i', '【】', '【】<left>')
+vim.keymap.set('i', '《》', '《》<left>')
+vim.keymap.set('i', '〔〕', '〔〕<left>')
+
+
+-- 括弧ショートカット
 vim.keymap.set('n', '<Leader>[', 'I「<ESC>A」<ESC>')
 vim.keymap.set('v', '<Leader>[', '"zc「<c-r>z」<ESC>')
 vim.keymap.set('n', '<Leader>]', 'I『<ESC>A』<ESC>')
@@ -153,14 +163,14 @@ vim.keymap.set('v','<Leader>?', '/\v^・<CR>')
 
 -- 引用符
 vim.keymap.set('n','<Leader>.', 'I＞<ESC>')
-vim.keymap.set('n','<Leader>>', 'I＞「<ESC>A」<ESC>')
-vim.keymap.set('n','<Leader><Leader>.', 'I＞（<ESC>A）<ESC>')
-vim.keymap.set('n','<Leader><Leader>>', 'I＞『<ESC>A』<ESC>')
+vim.keymap.set('n','<Leader>>', 'I＞「<ESC>A」<left>')
+vim.keymap.set('n','<Leader><Leader>.', 'I＞（<ESC>A）<left>')
+vim.keymap.set('n','<Leader><Leader>>', 'I＞『<ESC>A』<left>')
 
 vim.keymap.set('n','<Leader>,', 'I≫<ESC>')
-vim.keymap.set('n','<Leader><', 'I≫「<ESC>A」<ESC>')
-vim.keymap.set('n','<Leader><Leader>.', 'I≫（<ESC>A）<ESC>')
-vim.keymap.set('n','<Leader><Leader>>', 'I≫『<ESC>A』<ESC>')
+vim.keymap.set('n','<Leader><', 'I≫「<ESC>A」<left>')
+vim.keymap.set('n','<Leader><Leader>,', 'I≫（<ESC>A）<left>')
+vim.keymap.set('n','<Leader><Leader><', 'I≫『<ESC>A』<left>')
 
 -- 取り消し線
 vim.keymap.set('n','<Leader>~', 'I~~<ESC>A~~<ESC>')
@@ -194,15 +204,16 @@ vim.opt.wrapscan=true
 vim.keymap.set({'n','v'},'/','/\\v')
 vim.keymap.set({'n','v'},'?','/\\v#')
 
--- 
-vim.keymap.set('n','<leader>*',':vim // %')
-
+-- vimgrep
+vim.keymap.set("n", "<leader>*", [[:vimgrep // %<Left><Left><Left>]])
+vim.keymap.set("n", "<leader><leader>*", [[:vimgrep // **<Left><Left><Left><Left>]])
 
 -- その単語が含まれるmdファイルのタイトルをgrip検索。
-vim.keymap.set('n','#', '<cmd>lcd %:h<CR><cmd>vim /^# / % <CR><cmd>winc b<CR>')
+vim.keymap.set('n','#', '<cmd>cd %:h<CR><cmd>vim /^# / % <CR><cmd>winc b<CR>')
 
 -- その単語が含まれるカレントファイルのタイトルをgrip検索。
 vim.keymap.set('n', '<leader>3', function()
+  vim.cmd('cd %:h')
   local searchTerm = vim.fn.input('Vimgrep Heading: /^# ')
 
   if searchTerm == nil then
@@ -219,7 +230,7 @@ vim.keymap.set('n', '<leader>3', function()
     finalPattern = '^# .*' .. escapedTerm .. '.*'
   end
 
-  vim.cmd('lcd %:h')
+  vim.cmd('cd %:h')
   vim.cmd('vimgrep /' .. finalPattern .. '/ %')
   vim.cmd('copen')
 
@@ -227,6 +238,7 @@ end, { desc = 'Vimgrep search for heading in current file' })
 
 --見出し2以降を含む
 vim.keymap.set('n', '<leader>#', function()
+  vim.cmd('cd %:h')
   local searchTerm = vim.fn.input('Vimgrep Heading: /^#+ ')
 
   if searchTerm == nil then
@@ -236,13 +248,13 @@ vim.keymap.set('n', '<leader>#', function()
 
   local finalPattern = ''
   if searchTerm == '' then
-    finalPattern = '^#+ '
+    finalPattern = '^#\\+ '
   else
     local escapedTerm = vim.fn.escape(searchTerm, '/')
-    finalPattern = '^#+ .*' .. escapedTerm .. '.*'
+    finalPattern = '^#\\+ .*' .. escapedTerm .. '.*'
   end
 
-  vim.cmd('lcd %:h')
+  vim.cmd('cd %:h')
   vim.cmd('vimgrep /' .. finalPattern .. '/ %')
   vim.cmd('copen')
 
@@ -251,6 +263,7 @@ end, { desc = 'Vimgrep search for heading in current file' })
 
 -- その単語が含まれるカレントディレクトリ内のタイトルをgrip検索。
 vim.keymap.set('n', '<leader>3', function()
+  vim.cmd('cd %:h')
   local searchTerm = vim.fn.input('Vimgrep Heading: /^# **')
 
   if searchTerm == nil then
@@ -274,6 +287,7 @@ end, { desc = 'Vimgrep search for heading in current directory files' })
 
 --見出し2以降を含む
 vim.keymap.set('n', '<leader>#', function()
+  vim.cmd('cd %:h')
   local searchTerm = vim.fn.input('Vimgrep Heading: /^#+ **')
 
   if searchTerm == nil then
@@ -283,10 +297,10 @@ vim.keymap.set('n', '<leader>#', function()
 
   local finalPattern = ''
   if searchTerm == '' then
-    finalPattern = '^#+ '
+    finalPattern = '^#\\+ '
   else
     local escapedTerm = vim.fn.escape(searchTerm, '/')
-    finalPattern = '^#+ .*' .. escapedTerm .. '.*'
+    finalPattern = '^#\\+ .*' .. escapedTerm .. '.*'
   end
 
   vim.cmd('vimgrep /' .. finalPattern .. '/ %')
