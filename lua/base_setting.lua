@@ -52,6 +52,9 @@ vim.opt.listchars = { tab = '>>', trail = '-', nbsp = '+' }
 -- スクロール制限
 vim.opt.scrolloff = 3
 
+-- conceal(折りたたみ)設定
+vim.opt.conceallevel=2
+
 
 -- ────────────────────diff────────────────────
 -- diffを横に

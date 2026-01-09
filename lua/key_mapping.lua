@@ -323,7 +323,7 @@ vim.keymap.set('n','<leader>gs',function()
 end, {remap=true})
 
 -- blame
-vim.keymap.set('n','<leader>bl',':Gitsigns blame')
+vim.keymap.set('n','<leader>bl',':Gitsigns blame<CR>')
 
 --marge tool
 vim.keymap.set('n', '<leader>df', ':DiffviewOpen<CR>')
@@ -337,16 +337,16 @@ vim.keymap.set('n', ']c', function()
 end, { desc = 'Git: Next Hunk' }) -- remap=true は不要
 
 -- diff
-vim.keymap.set('n','<leader>gd',':Gitsigns diffthis')
+vim.keymap.set('n','<leader>gd',':Gitsigns diffthis<CR>')
 --────────────────────編集系────────────────────
 --行の連結
-vim.keymap.set('v','<c-s-j>','<c-j>') 
+vim.keymap.set({'n','v'},'<C-j>','J') 
 
 --────────────────────tex────────────────────
 --句読点置き換え
 vim.keymap.set('n','<leader>co','<cmd>:%s/、/，/g<CR><cmd>:%s/。/．/g<CR>') 
 
-vim.keymap.set('n','<leader>ve','a\\verb||<left>') 
+vim.keymap.set('n','<leader>ve','viw"zc\\verb||<left><esc>"zp') 
 vim.keymap.set('n','<leader>4' ,'a$$<left>') 
 vim.keymap.set('n','<leader>$' ,'a$$<left>') 
 
