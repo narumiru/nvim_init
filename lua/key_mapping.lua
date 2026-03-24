@@ -1,7 +1,10 @@
 
 -- ────────────────────便利系────────────────────
 -- ノーマルモード移行時自動保存
-vim.keymap.set('i','<ESC>','<ESC>:w<CR>')
+-- vscode上では動作させない
+if not vim.g.vscode then
+    vim.keymap.set('i','<ESC>','<ESC>:w<CR>')
+end
 
 -- フォントサイズを変更する関数
 local function change_font_size(delta)
@@ -97,11 +100,11 @@ vim.keymap.set('v','x','"_dx')
 -- 全選択
 vim.keymap.set('n','<leader>a','ggVG')
 -- 矩形
-vim.keymap.set('v','v',' <c-v>')
+vim.keymap.set('v','v','<c-v>')
 
 -- インデントを複数回移動可能に
-vim.keymap.set('v','<<',' <<gv')
-vim.keymap.set('v','>>',' >>gv')
+vim.keymap.set('v','<','<gv')
+vim.keymap.set('v','>','>gv')
 
 -- ────────────────────システム関係────────────────────
 -- 設定ファイルを読み込む
@@ -119,6 +122,8 @@ if vim.fn.has("mac") == 1 then
     vim.keymap.set('n','<Leader>cd','<cmd>cd ~/git_txt/txt<CR>')
     vim.keymap.set('n','<Leader>lo','<cmd>cd ~/research/my_bbmocbs/log<CR>')
     vim.keymap.set('n','<Leader>re','<cmd>cd ~/research/research_memo<CR><cmd>e 研究日誌_2025.md<CR>')
+    vim.keymap.set('n','<Leader>md','<cmd>cd /opt/homebrew/Cellar/neovim/0.11.4/share/nvim/runtime/syntax<CR><cmd>e markdown.vim<CR>')
+    vim.keymap.set('n','<Leader>te','<cmd>cd ~/tex/master_thesis<CR><cmd>e main_master.tex<CR>')
 
 elseif vim.fn.has("win64") == 1 then
     vim.keymap.set('n','<Leader>in','<cmd>cd ~/AppData/Local/nvim/lua<CR><cmd>e ../init.lua<CR>')
@@ -167,10 +172,16 @@ vim.keymap.set('n','<Leader>>', 'I＞「<ESC>A」<left>')
 vim.keymap.set('n','<Leader><Leader>.', 'I＞（<ESC>A）<left>')
 vim.keymap.set('n','<Leader><Leader>>', 'I＞『<ESC>A』<left>')
 
+vim.keymap.set('v','<Leader>.', '<c-v>0I＞<ESC>')
+vim.keymap.set('v','<Leader>>', '<c-v>0I＞<ESC>')
+
 vim.keymap.set('n','<Leader>,', 'I≫<ESC>')
 vim.keymap.set('n','<Leader><', 'I≫「<ESC>A」<left>')
 vim.keymap.set('n','<Leader><Leader>,', 'I≫（<ESC>A）<left>')
 vim.keymap.set('n','<Leader><Leader><', 'I≫『<ESC>A』<left>')
+
+vim.keymap.set('v','<Leader>,', '<c-v>0I≫<ESC>')
+vim.keymap.set('v','<Leader><', '<c-v>0I≫<ESC>')
 
 -- 取り消し線
 vim.keymap.set('n','<Leader>~', 'I~~<ESC>A~~<ESC>')
@@ -344,7 +355,7 @@ vim.keymap.set({'n','v'},'<C-j>','J')
 
 --────────────────────tex────────────────────
 --句読点置き換え
-vim.keymap.set('n','<leader>co','<cmd>:%s/、/，/g<CR><cmd>:%s/。/．/g<CR>') 
+vim.keymap.set('n','<leader>co','<cmd>%s/、/，/ge<CR><cmd>%s/。/．/ge<CR>') 
 
 vim.keymap.set('n','<leader>ve','viw"zc\\verb||<left><esc>"zp') 
 vim.keymap.set('n','<leader>4' ,'a$$<left>') 
@@ -353,6 +364,9 @@ vim.keymap.set('n','<leader>$' ,'a$$<left>')
 vim.keymap.set('v','<leader>ve','"zc\\verb||<left><esc>"zp') 
 vim.keymap.set('v','<leader>4' ,'"zc$$<left><esc>"zp') 
 vim.keymap.set('v','<leader>$' ,'"zc$$<left><esc>"zp') 
+
+vim.keymap.set('n','<leader>zb','<cmd>s/(/（/g<CR><cmd>s/)/）/g<CR>')
+vim.keymap.set('v','<leader>zb','<cmd>s/(/（/g<CR><cmd>s/)/）/g<CR>')
 
 
 --────────────────────ウィンドウ操作系────────────────────

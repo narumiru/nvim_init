@@ -55,11 +55,37 @@ vim.opt.scrolloff = 3
 -- conceal(折りたたみ)設定
 vim.opt.conceallevel=2
 
+-- texのみconcealを無効（数式の表示がおかしくなるため）
+vim.api.nvim_create_autocmd({ "FileType", "BufWinEnter" }, {
+  pattern = "tex",
+  callback = function()
+    -- カレントウィンドウの設定を 0 に固定
+    vim.opt_local.conceallevel = 0
+  end,
+})
+
+vim.api.nvim_create_autocmd("OptionSet", {
+  pattern = "conceallevel",
+  callback = function()
+    local new_val = vim.v.option_new
+    if new_val ~= 0 then
+      vim.opt_local.conceallevel = 0
+    end
+  end,
+})
 
 -- ────────────────────diff────────────────────
--- diffを横に
-vim.opt.diffopt:append('vertical')
-
+-- diff設定
+vim.opt.diffopt = {
+  "vertical",
+  "internal",
+  "filler",
+  "closeoff",
+  "indent-heuristic",
+  "linematch:60",
+  "algorithm:histogram",
+  "inline:char"
+}
 --────────────────────検索────────────────────
  
 -- vimgrep が完了した後に Quickfix ウィンドウを自動で開く
